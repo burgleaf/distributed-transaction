@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.binf.distributed.xashardingjdbc.dao.OrderInfoMapper">
+
+
+   <select id="findAll" resultType="me.binf.distributed.xashardingjdbc.entity.OrderInfo">
+       select * from order_info
+   </select>
+
+
+   <insert id="insert" parameterType="me.binf.distributed.xashardingjdbc.entity.OrderInfo">
+        insert into order_info values(#{id},#{order_amount},#{order_status},#{user_id})
+   </insert>
+
+</mapper>
