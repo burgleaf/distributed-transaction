@@ -1,7 +1,9 @@
 # 分布式事务DEMO
 
 
-####XA协议两阶段提交
+分布式事务理解和实践的文章可以看这里https://www.jianshu.com/p/4e3f45ed36fa
+
+#### XA协议两阶段提交
 
 
 - xa-atomikos 项目是使用atomikos来做分布式事务
