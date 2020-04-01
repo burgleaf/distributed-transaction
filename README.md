@@ -22,3 +22,23 @@ CREATE TABLE `order_info_1` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ```
+
+### TCC事务补偿机制
+
+- tcc-transaction 项目使用的表和数据
+
+```sql
+CREATE TABLE `user_account` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `account` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+//数据库A数据
+INSERT INTO `shard_order`.`user_account`(`id`, `user_id`, `account`) VALUES (1, 2, 2000.00);
+
+//数据库B数据
+INSERT INTO `shard_order`.`user_account`(`id`, `user_id`, `account`) VALUES (1, 2, 1000.00);
+
+```
