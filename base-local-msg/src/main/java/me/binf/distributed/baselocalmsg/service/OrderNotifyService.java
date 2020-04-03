@@ -27,9 +27,9 @@ public class OrderNotifyService {
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void orderNotify() throws Exception{
-        System.out.println("进入cron************");
         List<PayMsg> payMsgList =new ArrayList<>();
-        List<Map<String,Object>> mapList = db20JdbcTemplate.queryForList("select id,order_id,status,fail_count from pay_msg");
+        //查询未处理成功的消息
+        List<Map<String,Object>> mapList = db20JdbcTemplate.queryForList("select id,order_id,status,fail_count from pay_msg where status = 0");
         if(mapList.isEmpty()){
             return;
         }
@@ -40,7 +40,7 @@ public class OrderNotifyService {
         }
         for (PayMsg payMsg: payMsgList) {
             int order_id = payMsg.getOrder_id();
-            //http://localhost:8080/handleorder?id=2001
+            //调用订单接口来更改消息状态，这里会有重试，最多重试五次
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
             HttpGet httpGet = new HttpGet("http://localhost:8080/handleorder?id="+order_id);
             CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
