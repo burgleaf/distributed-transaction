@@ -1,4 +1,4 @@
-package me.binf.distributed.tcctransaction.config;
+package me.binf.distributed.baselocalmsg.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
